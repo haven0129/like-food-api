@@ -11,4 +11,6 @@
 > spring session + redis实现session信息的存取
 >
 > spring security实现系统的安全控制
+>
+> 数据库使用mysql
 
