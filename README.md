@@ -2,15 +2,17 @@
 
 ##### 某个食品系统的api接口，遵循rest风格。
 
-> 使用gradle构建的spring boot单应用。
+> 框架：spring boot + spring + spring data jpa
 >
-> 数据持久化使用spring data jpa
+> 项目构建：gradle
 >
-> slf4j+logbak记录日志
+> 日志:slf4j+logbak
 >
-> spring session + redis实现session信息的存取
+> 权限及安全控制：Spring Security
 >
-> spring security实现系统的安全控制
 >
-> 数据库使用mysql
-
+> 用户登录凭证：Spring Session + redis
+>
+> 数据库：mysql
+>
+> 接口文档：swaggerUI
