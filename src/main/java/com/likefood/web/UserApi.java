@@ -43,6 +43,8 @@ public class UserApi {
     private CheckService checkService;
     @Autowired
     private UserDtoConverter userDtoConverter;
+    @Autowired
+    private SendMsg sendMsg;
 
     @ApiOperation(value = "/user/role/list", nickname = "获得角色列表", notes = "获得角色列表")
     @RequestMapping(value = "/user/role/list", method = RequestMethod.GET, produces = {"application/json"})
@@ -166,7 +168,7 @@ public class UserApi {
         if(StringUtils.isEmptyOrNull(user.getMobile())){
             throw new LikefoodException(MsgValue.NOT_BIND_MOBILE);
         }
-        String result = SendMsg.sentValidCode(mobild);
+        String result = sendMsg.sentValidCode(mobild);
         if(!StringUtils.isEmptyOrNull(result)){
             HttpSession session = request.getSession(true);
             session.setAttribute("mobile", mobild);
