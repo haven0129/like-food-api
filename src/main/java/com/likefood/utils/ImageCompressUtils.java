@@ -1,8 +1,5 @@
 package com.likefood.utils;
 
-/**
- *
- */
 import com.sun.imageio.plugins.jpeg.JPEGImageWriter;
 import org.w3c.dom.Element;
 
