@@ -1,0 +1,66 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.M7'
+	}
+	repositories {
+		maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+		jcenter()
+		mavenCentral()
+		maven { url 'https://repo.spring.io/libs-milestone' }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply from: "test.gradle"
+
+group = 'com.likefood'
+version = '1.0.0'
+sourceCompatibility = 1.8
+jar {
+	baseName = 'likefood-api'
+}
+compileJava {
+	options.compilerArgs << '-parameters'
+}
+repositories {
+	maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+	jcenter()
+	mavenCentral()
+	maven { url 'https://repo.spring.io/libs-milestone' }
+}
+
+ext {
+	springCloudVersion = 'Finchley.M5'
+}
+dependencies {
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+	compile('org.springframework.session:spring-session-core')
+	// https://mvnrepository.com/artifact/org.springframework.session/spring-session-jdbc
+	compile group: 'org.springframework.session', name: 'spring-session-jdbc', version: '2.0.0.RELEASE'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5'
+	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
+	compile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+	compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
+	compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.42'
+	compile 'io.springfox:springfox-swagger2:2.8.0'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+
+//	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}

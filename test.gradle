@@ -1,0 +1,30 @@
+dependencies {
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'io.springfox:springfox-bean-validators:2.8.0'
+    testCompile 'io.springfox:springfox-staticdocs:2.6.1'
+}
+
+ext {
+    swaggerOutputDir = file("${buildDir}/swagger")
+}
+
+test {
+    systemProperty 'io.springfox.staticdocs.outputDir', swaggerOutputDir
+}
+task copyTestResources(type: Copy) {
+    from "${buildDir}/resources/main/versions.properties"
+    into "${buildDir}/resources/test/"
+}
+
+processTestResources.dependsOn copyTestResources
+
+task doc(dependsOn: 'test', type: Copy)  {
+    def srcFile = "${swaggerOutputDir}/swagger.json"
+    from srcFile
+    into './doc'
+
+    include 'swagger.json'
+    rename "swagger", 'xx食品'
+}
+
+
